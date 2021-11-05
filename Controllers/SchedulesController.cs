@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace aleApiTest.Controllers
 {
+    [EnableCors(origins: "https://localhost:44356", headers: "*", methods: "*")]
     public class SchedulesController : ApiController
     {
         //private readonly ApiDbContext _context;

@@ -11,7 +11,7 @@ select * from coaches
 select * from locations
 select * from RelUserSchedules
 
-
+update users set passwordHash = passwordHash_old where id=2
 
 set  dateformat 'dmy'
 
@@ -42,3 +42,5 @@ values ( 'primera',1,'1-11-2021','2-11-2021','1-11-2021','2-11-2021',2,1,1),
 ( 'segunda',3,'3-11-2021','3-11-2021','3-11-2021','3-11-2021',1,1,1),
 ( 'tercera',4,'4-11-2021','5-11-2021','3-11-2021','3-11-2021',1,1,1),
 ( 'cuarta',5,'5-11-2021','3-11-2021','3-11-2021','3-11-2021',1,1,1)
+
+

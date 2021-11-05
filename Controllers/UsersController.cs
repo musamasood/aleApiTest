@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace aleApiTest.Controllers
 {
+    [EnableCors(origins: "https://localhost:44356",headers:"*",methods:"*")]
     public class UsersController : ApiController
     {
         private ApiUserRepository _Repo;
