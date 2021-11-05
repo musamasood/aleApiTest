@@ -42,4 +42,9 @@ GO
 ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_dbo.Users_dbo.Roles_RoleId]
 GO
 
+ALTER TABLE [dbo].[users] ADD  CONSTRAINT [U_usersColorCol]  DEFAULT ('#1783CC') FOR [Color]
+GO
+
+ALTER TABLE [dbo].[users] ADD  CONSTRAINT [U_NickCol]  DEFAULT ('') FOR [NickName]
+GO
 

@@ -7,7 +7,7 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
+/*
 CREATE TABLE [dbo].[users](
 	[idUser] [int] IDENTITY(1,1) NOT NULL,
 	[userDNI] [varchar](50) NOT NULL,
@@ -36,5 +36,6 @@ GO
 
 ALTER TABLE [dbo].[users] ADD  CONSTRAINT [U_NickCol]  DEFAULT ('') FOR [NickName]
 GO
+*/
 
 

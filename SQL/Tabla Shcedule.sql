@@ -7,7 +7,7 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
+/*
 CREATE TABLE [dbo].[schedule](
 	[idSchedule] [int] IDENTITY(1,1) NOT NULL,
 	[SchDescription] [nvarchar](100) NOT NULL,
@@ -27,3 +27,4 @@ GO
 
 ALTER TABLE [dbo].[schedule] ADD  CONSTRAINT [S_NickCol]  DEFAULT ('') FOR [NickName]
 GO
+*/
