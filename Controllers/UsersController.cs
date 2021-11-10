@@ -62,10 +62,10 @@ namespace aleApiTest.Controllers
                     var userList = _Repo.UserInsert(user);
                     return userList.ToList();
                 }
-                catch (Exception)
+                catch (Exception err)
                 {
 
-                    throw;
+                    throw err;
                 }
 
             }
@@ -75,35 +75,43 @@ namespace aleApiTest.Controllers
 
         [HttpPost]
         [Route("api/Login")]
-        public bool Login([FromBody] User user)
+        public IHttpActionResult Login([FromBody] User user)
         {
-
             using (var db = new ApiDbContext())
             {
-                var loginOk = _Repo.LoginUser(user.Username,user.Email, user.Password);
-                if (loginOk)
-                    return true;
-                else
-                    return false;
+                try
+                {
+
+                    if(_Repo.LoginUser(user.Username,user.Password))
+                        return Ok();
+                    else
+                        return BadRequest();
+                }
+                catch (Exception err)
+                {
+
+                    throw err;
+                }
             }
 
         }
 
         [HttpPut]
-        public IEnumerable<User> Put(User user)
+        public IHttpActionResult Put(User user)
         {
-
             using (var db = new ApiDbContext())
             {
                 try
                 {
-                    var userList = _Repo.UserUpdate(user);
-                    return userList.ToList();
+                    if (_Repo.UserUpdate(user))
+                        return Ok();
+                    else
+                        return BadRequest();
                 }
-                catch (Exception)
+                catch (Exception err)
                 {
 
-                    throw;
+                    throw err;
                 }
 
             }
@@ -111,7 +119,7 @@ namespace aleApiTest.Controllers
         }
         [HttpPut]
         [Route("api/ChangePass")]
-        public bool ChangePass([FromBody] User user)
+        public IHttpActionResult ChangePass([FromBody] User user)
         {
 
             using (var db = new ApiDbContext())
@@ -119,32 +127,38 @@ namespace aleApiTest.Controllers
                 try
                 {
 
-                    var userChangePass = _Repo.UserChangePass(user.Username, user.Password);
-                    if (userChangePass)
-                        return true;
+                    if(_Repo.UserChangePass(user.Username, user.Password))
+                        return Ok();
                     else
-                        return false;
+                        return BadRequest();
                 }
-                catch (Exception)
+                catch (Exception err)
                 {
 
-                    throw;
+                    throw err;
                 }
 
             }
 
         }
         [HttpDelete]
-        public bool Delete(string username)
+        public IHttpActionResult Delete(string username)
         {
 
             using (var db = new ApiDbContext())
             {
-                var userBorrado = _Repo.UserDetete(username);
-                if (userBorrado)
-                    return true;
-                else
-                    return false;
+                try
+                {
+                    if (_Repo.UserDetete(username))
+                        return Ok();
+                    else
+                        return BadRequest();
+                }
+                catch (Exception err)
+                {
+
+                    throw err;
+                }
             }
 
         }

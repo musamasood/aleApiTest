@@ -13,7 +13,7 @@ namespace Api.BL.Repositories
     {
         private DbRawSqlQuery<Schedule> listado1;
 
-        public List<Schedule> SheduleAll( int id=0, int pageSize = 10, int pageNumber = 1)
+        public List<Schedule> SheduleAll( int id=0, int pageSize = 100, int pageNumber = 1)
         {
 
             using (var db = new ApiDbContext())
@@ -27,43 +27,51 @@ namespace Api.BL.Repositories
 
             }
         }
-        public List<Schedule> SheduleInsert(Schedule schedule)
+        public bool  SheduleInsert(Schedule schedule)
         {
+            string result = "";
 
             using (var db = new ApiDbContext())
             {
 
                 try
                 {
-                    listado1 = db.Database.SqlQuery<Schedule>("exec sp_schedules_insert {0}, {1}, {2}, {3}, {4}, {5}",
+                    result = db.Database.SqlQuery<string>("exec sp_schedules_insert {0}, {1}, {2}, {3}, {4}, {5}",
                     schedule.Description, schedule.WeekSelect,schedule.TimeInit,schedule.TimeEnd,schedule.CoachId,
-                    schedule.LocationId);
+                    schedule.LocationId).First();
 
-                    return listado1.ToList();
+                    if (result == "1")
+                        return true;
+                    else
+                        return false;
 
                 }
-                catch (Exception)
+                catch (Exception err)
                 {
 
-                    throw;
+                    throw err;
                 }
 
             }
         }
 
-        public List<Schedule> SheduleUpdate(Schedule schedule)
+        public bool SheduleUpdate(Schedule schedule)
         {
+            string result = "";
 
             using (var db = new ApiDbContext())
             {
 
                 try
                 {
-                    listado1 = db.Database.SqlQuery<Schedule>("exec sp_schedules_update {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
+                    result = db.Database.SqlQuery<string>("exec sp_schedules_update {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}",
                     schedule.Id, schedule.Description, schedule.WeekSelect, schedule.TimeInit, schedule.TimeEnd, schedule.CoachId,
-                    schedule.LocationId);
+                    schedule.LocationId).First();
 
-                    return listado1.ToList();
+                    if (result != "-1")
+                        return true;
+                    else
+                        return false;
 
                 }
                 catch (Exception)

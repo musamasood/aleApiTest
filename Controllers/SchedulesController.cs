@@ -61,58 +61,89 @@ namespace aleApiTest.Controllers
         }
 
         [HttpPost]
-        public IEnumerable<Schedule> Post([FromBody] Schedule schedule)
+        public IHttpActionResult Post([FromBody] Schedule schedule)
         {
 
             using (var db = new ApiDbContext())
             {
                 try
                 {
-                    var sheduleList = _Repo.SheduleInsert(schedule);
-                    return sheduleList.ToList();
+                    if(_Repo.SheduleInsert(schedule))
+                        return Ok();
+                    else
+                        return BadRequest();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    return BadRequest("Invalid data. "+ex);
                 }
                 
             }
 
         }
+
+        //public IEnumerable<Schedule> Post([FromBody] Schedule schedule)
+        //{
+
+        //    using (var db = new ApiDbContext())
+        //    {
+        //        try
+        //        {
+        //            var sheduleList = _Repo.SheduleInsert(schedule);
+        //            return sheduleList.ToList();
+        //        }
+        //        catch (Exception)
+        //        {
+
+        //            throw;
+        //        }
+
+        //    }
+
+        //}
+
+
         [HttpPut]
-        public IEnumerable<Schedule> Put(Schedule schedule)
+        public IHttpActionResult Put(Schedule schedule)
         {
 
             using (var db = new ApiDbContext())
             {
                 try
                 {
-                    var sheduleList = _Repo.SheduleUpdate(schedule);
-                    return sheduleList.ToList();
+                    if(_Repo.SheduleUpdate(schedule))
+                        return Ok();
+                    else
+                        return BadRequest();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    return BadRequest("Invalid data. " + ex);
                 }
 
             }
 
         }
         [HttpDelete]
-        public bool Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
 
             using (var db = new ApiDbContext())
             {
-                var sheduleBorrado = _Repo.SheduleDetete(id);
-                if (sheduleBorrado)
-                    return true;
-                else
-                    return false;
+                try
+                {
+                    if (_Repo.SheduleDetete(id))
+                        return Ok();
+                    else
+                        return BadRequest();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest("Invalid data. " + ex);
+                }
             }
-
         }
     } 
 }

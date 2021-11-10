@@ -1,15 +1,13 @@
 USE [aleTest]
 GO
 
-/****** Object:  Table [dbo].[Users]    Script Date: 04/11/2021 19:17:00 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 05/11/2021 17:23:09 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
---drop table RelUserSchedules
---drop table Users
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Dni] [nvarchar](50) NULL,
@@ -35,6 +33,12 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [U_usersColorCol]  DEFAULT ('#1783CC') FOR [Color]
+GO
+
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [U_NickCol]  DEFAULT ('') FOR [NickName]
+GO
+
 ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Users_dbo.Roles_RoleId] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([Id])
 GO
@@ -42,9 +46,7 @@ GO
 ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_dbo.Users_dbo.Roles_RoleId]
 GO
 
-ALTER TABLE [dbo].[users] ADD  CONSTRAINT [U_usersColorCol]  DEFAULT ('#1783CC') FOR [Color]
-GO
 
-ALTER TABLE [dbo].[users] ADD  CONSTRAINT [U_NickCol]  DEFAULT ('') FOR [NickName]
-GO
-
+CREATE UNIQUE INDEX PK_Users_Email
+   ON Users (Email);   
+GO  

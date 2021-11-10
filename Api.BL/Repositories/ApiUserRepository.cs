@@ -16,7 +16,7 @@ namespace Api.BL.Repositories
         private DbRawSqlQuery<User> listado1;
         private DbRawSqlQuery<RelUserSchedule> listado2;
 
-        public List<User> UserAll(string username = "", int pageSize = 10, int pageNumber = 1)
+        public List<User> UserAll(string username = "", int pageSize = 100, int pageNumber = 1)
         {
 
             using (var db = new ApiDbContext())
@@ -58,19 +58,22 @@ namespace Api.BL.Repositories
             }
         }
 
-        public List<User> UserUpdate(User user)
+        public bool UserUpdate(User user)
         {
-
+            string resul = "";
             using (var db = new ApiDbContext())
             {
 
                 try
                 {
-                    listado1 = db.Database.SqlQuery<User>("exec sp_user_update {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8},{9},{10},{11}",
+                    resul = db.Database.SqlQuery<string>("exec sp_user_update {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8},{9},{10},{11}",
                     user.Dni, user.Email,user.PhoneNumber, user.Firstname, user.Lastname, user.Username, user.Password,
-                    user.Avatar, user.Color, user.NickName, user.RoleId, user.IsActivo);
+                    user.Avatar, user.Color, user.NickName, user.RoleId, user.IsActivo).First();
 
-                    return listado1.ToList();
+                    if (resul == "1")
+                        return true;
+                    else
+                        return false;
 
                 }
                 catch (Exception)
@@ -134,7 +137,7 @@ namespace Api.BL.Repositories
             }
         }
 
-        public bool LoginUser(string username,string email, string pass)
+        public bool LoginUser(string username,string pass)
         {
             
             using (var db = new ApiDbContext())
@@ -145,7 +148,7 @@ namespace Api.BL.Repositories
                 {
                     string hashedPass2 = "";
                     bool isVerified = false;
-                    hashedPass2 = db.Database.SqlQuery<string>("exec sp_user_login {0},{1}", username, email).First();
+                    hashedPass2 = db.Database.SqlQuery<string>("exec sp_user_login {0}", username).First();
 
                     if (hashedPass2.Length > 1)
                     {

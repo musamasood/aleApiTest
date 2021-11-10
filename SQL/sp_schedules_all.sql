@@ -1,12 +1,13 @@
-USE [aletest]
+USE [aleTest]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_schedules_all]    Script Date: 03/11/2021 14:14:30 ******/
+/****** Object:  StoredProcedure [dbo].[sp_schedules_all]    Script Date: 07/11/2021 19:32:21 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 CREATE PROCEDURE [dbo].[sp_schedules_all] (  @id int=0, @PageSize INT = 10, @PageNumber INT = 1, @where VARCHAR(1000) = '', @orderby VARCHAR(100) = '1')
 
@@ -29,3 +30,5 @@ SET @sps = CONCAT(@sps, ' order by ', @orderby, ' offset ', @PageSize * (@PageNu
 EXECUTE sp_executesql @sps
 END
 GO
+
+
