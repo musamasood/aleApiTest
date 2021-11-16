@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="aleoApiTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="idSchedule" />
+          </Key>
+          <Property Name="idSchedule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchDescription" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SchWeekSelect" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SchTimeInit" Type="time" Precision="7" Nullable="false" />
+          <Property Name="SchTimeEnd" Type="time" Precision="7" Nullable="false" />
+          <Property Name="idUsersCoath" Type="int" Nullable="false" />
+          <Property Name="idLocation" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userDNI" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userEmail" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="userPhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="userFirstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userLastname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userUsername" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userAvatar" Type="varchar(max)" />
+          <Property Name="userDateCreate" Type="datetime" Nullable="false" />
+          <Property Name="userDateUpdate" Type="datetime" Nullable="false" />
+          <Property Name="idRole" Type="int" Nullable="false" />
+          <Property Name="userOldPassword" Type="varchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="aleoApiTestModelStoreContainer">
+          <EntitySet Name="schedule" EntityType="Self.schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="aleoApiTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="schedule">
+          <Key>
+            <PropertyRef Name="idSchedule" />
+          </Key>
+          <Property Name="idSchedule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SchWeekSelect" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SchTimeInit" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="SchTimeEnd" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="idUsersCoath" Type="Int32" Nullable="false" />
+          <Property Name="idLocation" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userDNI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userFirstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userLastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userAvatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="userDateCreate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="userDateUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idRole" Type="Int32" Nullable="false" />
+          <Property Name="userOldPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Color" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="aleoApiTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="schedules" EntityType="Self.schedule" />
+          <EntitySet Name="users" EntityType="Self.user" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="aleoApiTestModelStoreContainer" CdmEntityContainer="aleoApiTestEntities">
+          <EntitySetMapping Name="schedules">
+            <EntityTypeMapping TypeName="aleoApiTestModel.schedule">
+              <MappingFragment StoreEntitySet="schedule">
+                <ScalarProperty Name="idSchedule" ColumnName="idSchedule" />
+                <ScalarProperty Name="SchDescription" ColumnName="SchDescription" />
+                <ScalarProperty Name="SchWeekSelect" ColumnName="SchWeekSelect" />
+                <ScalarProperty Name="SchTimeInit" ColumnName="SchTimeInit" />
+                <ScalarProperty Name="SchTimeEnd" ColumnName="SchTimeEnd" />
+                <ScalarProperty Name="idUsersCoath" ColumnName="idUsersCoath" />
+                <ScalarProperty Name="idLocation" ColumnName="idLocation" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="aleoApiTestModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userDNI" ColumnName="userDNI" />
+                <ScalarProperty Name="userEmail" ColumnName="userEmail" />
+                <ScalarProperty Name="userPhoneNumber" ColumnName="userPhoneNumber" />
+                <ScalarProperty Name="userFirstname" ColumnName="userFirstname" />
+                <ScalarProperty Name="userLastname" ColumnName="userLastname" />
+                <ScalarProperty Name="userUsername" ColumnName="userUsername" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userAvatar" ColumnName="userAvatar" />
+                <ScalarProperty Name="userDateCreate" ColumnName="userDateCreate" />
+                <ScalarProperty Name="userDateUpdate" ColumnName="userDateUpdate" />
+                <ScalarProperty Name="idRole" ColumnName="idRole" />
+                <ScalarProperty Name="userOldPassword" ColumnName="userOldPassword" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
