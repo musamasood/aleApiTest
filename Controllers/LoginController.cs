@@ -1,6 +1,7 @@
 ﻿using aleApiTest.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,23 +13,33 @@ namespace aleApiTest.Controllers
 {
     public class LoginController : ApiController
     {
-        private aleoApiTestEntities db = new aleoApiTestEntities();
-
+        public aleoApiTestEntities db = new aleoApiTestEntities();
+        
         // POST api/Login/UserLogin
         [ResponseType(typeof(Login))]
-        public IHttpActionResult PostUserLogin(string username, string password)
+        public IHttpActionResult GetUserLogin(string username, string password)
         {
-            //ClaimsIdentity ci = new ClaimsIdentity();
-            var checkuser = db.users.Where(x => x.userUsername == username && x.userPassword == password).FirstOrDefault();
-            if (checkuser != null)
-            {
-                Console.WriteLine("CORRECT UserName and Password");
+            //var uio = db.users.ToList();
+            //try
+            //{
+                var checkuser = db.users.Where(x => x.userUsername == username && x.userPassword == password).FirstOrDefault();
+
+                if (checkuser != null)
+                {
+                   // Console.WriteLine("CORRECT UserName and Password");
+                return Ok("CORRECT UserName and Password");
             }
-            else
-            {
-                Console.WriteLine("INCORRECT UserName or Password");
-            }
-            return StatusCode(HttpStatusCode.NoContent);
+                else
+                {
+                return Ok("INCORRECT UserName or Password");
+             }
+            //}
+            //catch (Exception e)
+            //{
+            //   // return View("Error");
+            //}
+
+            return Ok(checkuser);
         }
     }
 }

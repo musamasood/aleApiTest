@@ -15,7 +15,7 @@ using aleApiTest.Models;
 namespace aleApiTest.Controllers
 {
     
-    public class usersController : ApiController
+    public class UsersController : ApiController
     {
         private aleoApiTestEntities db = new aleoApiTestEntities();
 
